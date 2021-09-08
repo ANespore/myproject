@@ -1,0 +1,202 @@
+import cars.Car;
+import controller.Bank;
+import entitiy.User;
+import org.w3c.dom.ls.LSOutput;
+import cars.ShowRoom;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.UUID;
+
+import entitiy.User;
+
+public class main {
+    ShowRoom showRoom = new ShowRoom();
+
+    public static void main(String[] args) {
+          main main = new main();
+          main.showMenu();
+
+//        User user =new User("00123456",10.00,"Anda Nespore","female");
+//        Bank bank = new Bank();
+//        System.out.println("Welcome to Bank  "+user.name);
+//        System.out.println(bank.setAciveUser(user));
+//        System.out.println("Current Balance:  "  + bank.getUserBalance());
+//        System.out.println(bank.creditUser(23.3) );
+//        System.out.println(bank.getUserBalance());
+//        System.out.println(bank.debitUser(5.90));
+//        System.out.println(bank.getUserBalance());
+//        System.out.println(bank.debitUser(27.5));
+
+           // SampleArrayofStrings array = new SampleArrayofStrings();
+       // System.out.println(array.arrays());
+
+
+
+
+
+
+         //initialize class
+        //calculator calc = new calculator();
+
+
+        //Phone iphone11 = new Phone ("Iphone11","Apple",2019,899.00f,false);
+       // Phone samsung = new Phone ("Galaxy s8","Samsung",2017,699.99f,true);
+       // Phone iphone12 = new Phone ("iPhone 12","Apple",2020,999.99f,false);
+       // Laptop dell = new Laptop("Latitude","Dell",500,999.00f,false);
+
+  //
+        //iphone12.setIsFaulty(true);
+
+
+        //System.out.println(iphone11.sellPhone());
+        //System.out.println(iphone12.sellPhone());
+        //System.out.println(samsung.sellPhone());
+       // System.out.println(iphone11.getDescription());
+        //System.out.println(samsung.getDescription());
+        //System.out.println(dell.getDescription());
+        //System.out.println(iphone12.getDescription());
+
+        // create an object of Scanner class
+
+          /*
+        char operator;
+        int number1, number2;
+        int total;
+
+        System.out.println("please enter the first number");
+        number1 = input.nextInt();
+        System.out.println("please enter the second number");
+        number2 = input.nextInt();
+        // ask users to enter operator
+        System.out.println("Choose an operator: +, -, *, or /");
+
+        operator = input.next().charAt(0);
+
+
+        switch (operator) {
+
+            case '+':
+                total = calc.addNumbers(number1,number2);
+                System.out.println("The result is:  " +total);
+                break;
+
+            case '-':
+                total = calc.SubstractNumbers(number1,number2);
+                System.out.println("The result is:  " +total);
+                break;
+            case '*':
+                total = calc.MultiplyNumbers(number1,number2);
+                System.out.println("The result is:  " +total);
+                break;
+            case '/':
+                total = calc.DiviseNumbers(number1,number2);
+                System.out.println("The result is:  " +total);
+                break;
+            default:
+                System.out.println("Invalid operation!");
+                break;
+        }
+        */
+
+    }
+    void showMenu()
+    {
+        Scanner scanner = new Scanner(System.in);
+        String userInput = "";
+        do {
+            System.out.println("Welcome to the showroom, lease choose an activity: ");
+            System.out.println("1. Add Car");
+            System.out.println("2. View all cars");
+            System.out.println("3. View Single car");
+            System.out.println("4. Remove car ");
+            System.out.println("\n Enter Quit to end program ... ");
+            System.out.println("Choose a number:");
+            userInput = scanner.nextLine();
+
+            switch (userInput){
+                case "Quit":
+                    System.out.println("Exiting application....");
+                    break;
+                case "1":
+                    addCar();
+                    break;
+                case "2":
+                    viewAllCars();
+                    break;
+                case "3":
+                    viewSingleCar();
+                    break;
+                case "4":
+                    removeCar();
+                    break;
+                default:
+                    break;
+
+            }
+            
+
+        }
+            while (!userInput.equalsIgnoreCase("Quit"));
+            return;
+    }
+
+
+    void addCar() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Add car");
+        Car car = new Car();
+        System.out.println("Enter Name: ");
+        car.name = scanner.nextLine();
+
+        System.out.println("Enter Manufacturer: ");
+        car.manufacturer = scanner.nextLine();
+        System.out.println("Enter Type: ");
+        car.type = scanner.nextLine();
+        //random unique id is generated by UUID class
+        car.id = UUID.randomUUID();
+
+        String message = showRoom.addCar(car);
+        System.out.println(message);
+
+
+
+    }
+    
+    void viewAllCars()
+    {
+        ArrayList<Car> allCars  = showRoom.getAllCars();
+        System.out.println("\nAll available Cars\n");
+        System.out.println("Car name \t Manufacturer\t Car type ");
+        for (Car car:allCars){
+            System.out.println(car.name + "\t" + car.manufacturer + "\t" + car.type + "\t");
+        }
+
+
+
+
+
+    }
+
+    void viewSingleCar()
+    {
+
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter which car from list you want to see ");
+        Car SingleCar =  showRoom.getSingleCar(scanner.nextInt());
+        System.out.println(SingleCar.name + "\t" + SingleCar.manufacturer + "\t" + SingleCar.type + "\t" );
+
+
+    }
+
+    void removeCar()
+    {
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter which car from list you want to remove ");
+        System.out.println(showRoom.removeCar(scanner.nextInt()));
+
+
+    }
+}
